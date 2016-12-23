@@ -1,0 +1,21 @@
+{
+  "name": "three-start",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Warrior!"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wubocong/SwordWorld",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "stats.js": "*"
+  }
+}

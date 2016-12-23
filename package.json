@@ -1,0 +1,30 @@
+{
+  "name": "three-start",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Warrior!",
+  "license": "ISC",
+  "dependencies": {
+    "keyboardjs": "^2.3.3",
+    "physijs": "^0.0.4",
+    "three": "^0.83.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-external-helpers": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "babelrc-rollup": "^3.0.0",
+    "eslint": "^3.12.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "rollup": "^0.38.0",
+    "rollup-plugin-eslint": "^3.0.0",
+    "rollup-plugin-istanbul": "^1.1.0",
+    "rollup-watch": "^2.5.0"
+  }
+}
