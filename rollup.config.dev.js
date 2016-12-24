@@ -1,0 +1,11 @@
+import { readFileSync } from 'fs';
+import config from './rollup.config.js';
+
+config.plugins.push({
+	load: function ( id ) {
+		if ( ~id.indexOf( 'fs.js' ) ) return readFileSync( 'browser/fs.js', 'utf-8' );
+		if ( ~id.indexOf( 'path.js' ) ) return readFileSync( 'browser/path.js', 'utf-8' );
+	}
+});
+
+export default config;

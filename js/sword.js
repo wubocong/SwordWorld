@@ -1,4 +1,10 @@
-;(function init(posInit, directInit) {
+import promisify from 'es6-promisify';
+import * as THREE from 'three';
+// import { WebGLRenderer, Scene, PerspectiveCamera, PointLight, DirectionalLight, JSONLoader, MultiMaterial, Mesh, TextureLoader, MeshPhongMaterial, MeshLambertMaterial, RepeatWrapping, Vector3, SphereGeometry, PlaneGeometry, Vector2 } from 'three';
+
+import keyboardJS from 'keyboardjs';
+
+;(function init(posInit, directInit, promisify) {
   const isMobile = /(Mobile|Android|Nexus|i?Phone|Mac|Lumia)/i.test(navigator.userAgent);
   let pos = {},
     direct = {};
@@ -111,36 +117,31 @@
     }
   })();
 
-  const loader = new THREE.TextureLoader();
-  Promise.all([
-    async() => {
-      loader.load('./img/grass-background/grasslight-big.jpg')
-    },
-    async() => {
-      loader.load('./img/grass-background/grasslight-big-nm.jpg')
-    }])
-    .then(([textureDiffuse, textureNormal]) => {
-      console.log(textureNormal);
-      console.log(textureDiffuse);
-      textureDiffuse.wrapS = textureDiffuse.wrapT = THREE.RepeatWrapping;
-      textureNormal.wrapS = textureNormal.wrapT = THREE.RepeatWrapping;
-      textureDiffuse.repeat.set(200, 200);
-      textureNormal.repeat.set(200, 200);
+  // const loader = new THREE.TextureLoader();
+  // const pLoad = promisify(loader.load);
+  // Promise.all([pLoad('./img/grass-background/grasslight-big.jpg'), pLoad('./img/grass-background/grasslight-big-nm.jpg')])
+  //   .then(([textureDiffuse, textureNormal]) => {
+  //     console.log(textureNormal);
+  //     console.log(textureDiffuse);
+  //     textureDiffuse.wrapS = textureDiffuse.wrapT = THREE.RepeatWrapping;
+  //     textureNormal.wrapS = textureNormal.wrapT = THREE.RepeatWrapping;
+  //     textureDiffuse.repeat.set(200, 200);
+  //     textureNormal.repeat.set(200, 200);
 
-      const floorMaterial = new THREE.MeshPhongMaterial({
-        map: textureDiffuse,
-        normalMap: textureNormal,
-        normalScale: new THREE.Vector2(1, 1).multiplyScalar(0.5),
-        color: 0x44FF44,
-      });
+  //     const floorMaterial = new THREE.MeshPhongMaterial({
+  //       map: textureDiffuse,
+  //       normalMap: textureNormal,
+  //       normalScale: new THREE.Vector2(1, 1).multiplyScalar(0.5),
+  //       color: 0x44FF44,
+  //     });
 
-      const floorGeometry = new THREE.PlaneGeometry(10000, 10000, 100, 100);
-      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-      // floor.position.y = 0;
-      floor.rotation.x = Math.PI / 2;
-      scene.add(floor);
-      renderer.render(scene, camera);
-    });
+  //     const floorGeometry = new THREE.PlaneGeometry(10000, 10000, 100, 100);
+  //     const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+  //     // floor.position.y = 0;
+  //     floor.rotation.x = Math.PI / 2;
+  //     scene.add(floor);
+  //     renderer.render(scene, camera);
+  //   });
 
   const geometry = new THREE.SphereGeometry(5, 512, 64);
   const material = new THREE.MeshLambertMaterial({
@@ -161,11 +162,11 @@
   this.renderer = renderer;
   this.scene = scene;
   this.camera = camera;
-}.call(this, {
+}.call(window || global, {
   x: 0,
   y: 100,
   z: 0
 }, {
   longitude: 0,
   latitude: -Math.PI / 2
-}));
+}, promisify));
